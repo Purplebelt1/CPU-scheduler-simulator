@@ -4,6 +4,7 @@ class PCB:
         self.arrival_time = int(arrival_time)
         self.CPU_burst = int(CPU_burst)
         self.priority = int(priority)
+        self.wait_time = 0
 
     def __str__(self):
         if self.priority is not None:
