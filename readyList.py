@@ -12,6 +12,41 @@ class ReadyList:
         else:
             # Raise a ValueError if the input is not a PCB instance
             raise ValueError("Error: Only PCB instances can be inserted.")
+        
+    def reorder_by_process_ids(self, new_order):
+        # Check if the input list has the same elements as the current process IDs
+        if sorted(new_order) != sorted([pcb.get_process_id() for pcb in self.process_list]):
+            raise ValueError("Error: Input list must contain the same process IDs as the current list.")
+
+        # Create a new list to hold the reordered PCBs
+        reordered_list = []
+
+        # Iterate through the input list of process IDs
+        for process_id in new_order:
+            # Find the PCB with the matching process ID in the current list
+            pcb_index = self.find_index_by_process_id(process_id)
+            if pcb_index is not None:
+                # Add the found PCB to the reordered list
+                reordered_list.append(self.process_list[pcb_index])
+
+        # Update the process_list with the reordered list
+        self.process_list = reordered_list
+        
+    def get_running_pcb(self):
+        running_pcb = None
+
+        for pcb in self.process_list:
+            if pcb.get_is_running():
+                if running_pcb is not None:
+                    raise ValueError("Error: Multiple running PCBs found in the list.")
+                running_pcb = pcb
+        return running_pcb
+    
+    def find_index_by_process_id(self, target_process_id):
+        for index, pcb in enumerate(self.process_list):
+            if pcb.get_process_id() == target_process_id:
+                return index
+        raise ValueError("Error: Process ID not found in the list.")
 
     def append(self, pcb):
         # Append a PCB instance to the end of the list
@@ -55,22 +90,10 @@ class ReadyList:
             # Raise an IndexError if the index is out of range
             raise IndexError("Error: Index out of range.")
 
-    def set_full_list(self, pcb_list):
-        # Set the entire list to the input list of PCB instances
-        if isinstance(pcb_list, list) and all(isinstance(pcb, PCB) for pcb in pcb_list):
-            self.process_list = pcb_list
-        else:
-            # Raise a ValueError if the input is not a list of PCB instances
-            raise ValueError("Error: Input must be a list of PCB instances.")
-
-    def get_full_list(self):
+    def get_process_list(self):
         # Get the entire list of PCB instances
         return self.process_list
 
     def is_empty(self):
         # Check if the list is empty
         return len(self.process_list) == 0
-
-
-
-
