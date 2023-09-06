@@ -42,6 +42,12 @@ class ReadyList:
                 running_pcb = pcb
         return running_pcb
     
+    def increment_process_waiting(self, increment):
+        for pcb in self.process_list:
+            if not pcb.get_is_running():
+                pcb.increment_waiting(increment)
+        
+    
     def find_index_by_process_id(self, target_process_id):
         for index, pcb in enumerate(self.process_list):
             if pcb.get_process_id() == target_process_id:
