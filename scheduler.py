@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-import csv
+import csv # Remove this
 from pcb import PCB
 from readyList import ReadyList
 from fcfs import first_come_first_serve
@@ -40,6 +40,7 @@ def main():
     # Improve variable naming
     # Ability to deal with waiting state.
     # State based termination
+    # If priority queue error if 
 
     burst_time = 0
     ready_queue = ReadyList()
@@ -93,11 +94,14 @@ def main():
         burst_time += 1
     print("FINISHED")
 
+
+# Rewrite to not need csv library
 def write_output_file_header(path, headers):
     with open(path, mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(headers)
 
+# Rewrite to not need csv library
 def write_to_output_file(path, vars):
     with open(path, mode='a', newline='') as file:
         writer = csv.writer(file)
