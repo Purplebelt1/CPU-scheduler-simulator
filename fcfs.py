@@ -8,6 +8,6 @@ def first_come_first_serve(ready_queue):
         return running
     first_arrive = ready_queue.get(0)
     for i in ready_queue[1:]:
-        if int(i.get_arrival_time()) > first_arrive.get_arrival_time():
+        if int(i.get_arrival_time()) < first_arrive.get_arrival_time():
             first_arrive = i
     return first_arrive
