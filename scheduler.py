@@ -30,7 +30,16 @@ def main():
 
 
     write_output_file_header('./output/waittime.csv', ["Process ID", "Wait Time"])
+    
 
+    # Ideas for schedule rewrite.
+    # Add adjustable timeslots. Current one is hard coded to one.
+    # Fix over nesting
+    # Beutify/readability of running change.
+    # Output to schedule.csv
+    # Improve variable naming
+    # Ability to deal with waiting state.
+    # State based termination
     burst_time = 0
     ready_queue = ReadyList()
     while len(traces) > 0:
@@ -62,6 +71,8 @@ def main():
                 new_running_process = shortest_job_first(ready_queue, "pr")
             case "sjf-co":
                 new_running_process = shortest_job_first(ready_queue, "co")
+            case "rr-sjf":
+                new_running_process = round_robin(ready_queue, "sjf")
             case _:
                 ValueError("Algorithm [" + algorithm + "] is not supported.")
         

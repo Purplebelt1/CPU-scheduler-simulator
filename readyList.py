@@ -1,5 +1,12 @@
 from pcb import PCB
 
+
+# Ideas for ReadyList rewrite
+# Class rename
+# Method rename
+# Better and more consistent commenting
+# White space
+
 class ReadyList:
     def __init__(self):
         # Initialize an empty list to store PCB instances

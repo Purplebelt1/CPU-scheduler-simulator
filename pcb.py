@@ -7,7 +7,7 @@ class PCB:
         self.__wait_time = 0
         self.__has_run = False
         self.__is_running = False
-        self.__last_run = 0
+        self.__last_run = -1
 
     def increment_wait_time(self, increment):
         self.__wait_time += increment
