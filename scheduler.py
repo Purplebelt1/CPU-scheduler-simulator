@@ -33,13 +33,14 @@ def main():
     
 
     # Ideas for schedule rewrite.
-    # Add adjustable timeslots. Current one is hard coded to one.
+    # Add adjustable timeslots. Current one is hard coded to one. (Changable from config?)
     # Fix over nesting
     # Beutify/readability of running change.
     # Output to schedule.csv
     # Improve variable naming
     # Ability to deal with waiting state.
     # State based termination
+
     burst_time = 0
     ready_queue = ReadyList()
     while len(traces) > 0:
