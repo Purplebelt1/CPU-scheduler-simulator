@@ -3,6 +3,8 @@ import csv
 from pcb import PCB
 from readyList import ReadyList
 from fcfs import first_come_first_serve
+from roundRobin import round_robin
+from sjf import shortest_job_first
 
 def main():
 
@@ -13,14 +15,6 @@ def main():
     # Find and extract the values of algorithm and trace_file_path elements
     algorithm = root.find('algorithm').text
     trace_file_path = root.find('trace_file_path').text
-
-
-    # Check if algorithm name is valid
-    match algorithm:
-        case "fcfs":
-            pass
-        case _:
-            ValueError("Algorithm [" + algorithm + "] is not supported.")
 
     traces = ReadyList()
     with open(trace_file_path, "r") as traces_file:
@@ -44,6 +38,8 @@ def main():
             if i.get_arrival_time() == burst_time:
                 ready_queue.append(i)
         running_process = ready_queue.get_running_pcb()
+        print("----")
+        print(running_process)
 
         # Delete process if it is finished
         if running_process != None:
@@ -60,6 +56,14 @@ def main():
         match algorithm:
             case "fcfs":
                 new_running_process = first_come_first_serve(ready_queue)
+            case "rr-fcfs":
+                new_running_process = round_robin(ready_queue, "fcfs")
+            case "sjf-pr":
+                new_running_process = shortest_job_first(ready_queue, "pr")
+            case "sjf-co":
+                new_running_process = shortest_job_first(ready_queue, "co")
+            case _:
+                ValueError("Algorithm [" + algorithm + "] is not supported.")
         
 
         if running_process != None:

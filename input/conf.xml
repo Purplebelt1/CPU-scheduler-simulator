@@ -1,4 +1,4 @@
 <configuration>
-    <algorithm>fcfs</algorithm>
+    <algorithm>sjf-pr</algorithm>
     <trace_file_path>./input/traces.csv</trace_file_path>
 </configuration>
