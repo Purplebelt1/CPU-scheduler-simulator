@@ -5,9 +5,10 @@ from sjf import shortest_job_first
 
 
 # Ideas for Round Robin rewrite
-# Only check for multiple primary priority by chaecking if lowwest last run is 0. (This should cut down ~40% of the logic)
+# Only check for multiple primary priority by chaecking if lowwest last run is -1. (This should cut down ~40% of the logic)
 # Improve argument/variable naming
 # Change "pr/co" to better names.
+
 def round_robin(ready_queue, type):
 
     # If ready queue is empty then return that no program should run.
