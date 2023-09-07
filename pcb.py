@@ -7,9 +7,13 @@ class PCB:
         self.__wait_time = 0
         self.__has_run = False
         self.__is_running = False
+        self.__last_run = 0
 
     def increment_wait_time(self, increment):
         self.__wait_time += increment
+
+    def get_wait_time(self):
+        return self.__wait_time
 
 
     def get_has_run(self):
@@ -20,6 +24,12 @@ class PCB:
             self.__has_run = has_run
         else:
             raise ValueError("Error: 'has_run' must be a boolean value.")
+        
+    def get_last_run(self):
+        return self.__last_run
+
+    def set_last_run(self, time):
+        self.__last_run = time
 
     def get_is_running(self):
         return self.__is_running
@@ -72,6 +82,6 @@ class PCB:
 
     def __str__(self):
         if self.__priority is not None:
-            return f"Process ID: {self.__process_id}, Arrival Time: {self.__arrival_time}, CPU Burst: {self.__CPU_burst}, Priority: {self.__priority}"
+            return f"Process ID: {self.__process_id}, Arrival Time: {self.__arrival_time}, CPU Burst: {self.__CPU_burst}, Wait Time: {self.__wait_time}, Is Running: {self.__is_running}, Priority: {self.__priority}"
         else:
-            return f"Process ID: {self.__process_id}, Arrival Time: {self.__arrival_time}, CPU Burst: {self.__CPU_burst}"
+            return f"Process ID: {self.__process_id}, Arrival Time: {self.__arrival_time}, CPU Burst: {self.__CPU_burst}, Wait Time: {self.__wait_time}, Is Running: {self.__is_running}"
